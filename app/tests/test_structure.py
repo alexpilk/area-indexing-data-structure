@@ -1,10 +1,4 @@
-from pytest import fixture
-from app.structure import AreaIndex
-
-
-@fixture
-def area_index():
-    return AreaIndex()
+from app.tests.fixtures import area_index
 
 
 def test_bulk_create(area_index):
