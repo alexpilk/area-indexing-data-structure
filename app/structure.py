@@ -6,3 +6,12 @@ class AreaIndex:
 
         >>> AreaIndex().bulk_create([(-24.5, 134.8, 20, 'Australia')])
         """
+
+    def query(self, lat, long):
+        """
+        :param float lat:
+        :param float long:
+        :return: all areas that include given point.
+        :rtype: list
+        """
+        return []
