@@ -1,0 +1,2 @@
+class AreaIndex:
+    pass
