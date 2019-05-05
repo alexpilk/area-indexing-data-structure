@@ -21,4 +21,7 @@ class AreaIndex:
         return []
 
     def _point_in_area(self, point, area):
-        return True
+        lat = area[0]
+        long = area[1]
+        radius = area[2]
+        return (point[0] - lat) ** 2 + (point[1] - long) ** 2 <= radius ** 2
