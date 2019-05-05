@@ -40,4 +40,4 @@ def test_query_point_outside_two_areas(area_index):
 def test_fails_to_add_areas_with_same_ids(area_index):
     from app.structure import DuplicateIds
     with pytest.raises(DuplicateIds):
-        area_index.bulk_create((0, 0, 0, 'Area 1'), (1, 1, 1, 'Area 1'))
+        area_index.bulk_create([(0, 0, 0, 'Area 1'), (1, 1, 1, 'Area 1')])
