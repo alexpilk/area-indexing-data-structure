@@ -17,7 +17,7 @@ class Area:
 class AreaIndex:
 
     def __init__(self):
-        self.areas = {}
+        self.areas = []
 
     def bulk_create(self, areas):
         """
@@ -28,9 +28,7 @@ class AreaIndex:
         if len({area[3] for area in areas}) < len(areas):
             raise DuplicateIds('Multiple areas have same IDs')
 
-        for area in areas:
-            area = Area(*area)
-            self.areas[area.id] = area
+        self.areas = [Area(*area) for area in areas]
 
     def query(self, lat, long):
         """
@@ -43,7 +41,7 @@ class AreaIndex:
         []
 
         """
-        return [area_id for area_id, area in self.areas.items() if self._point_in_area((lat, long), area)]
+        return [area.id for area in self.areas if self._point_in_area((lat, long), area)]
 
     def _point_in_area(self, point, area):
         latitude_delta = point[0] - area.latitude
