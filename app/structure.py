@@ -19,3 +19,6 @@ class AreaIndex:
 
         """
         return []
+
+    def _point_in_area(self, point, area):
+        return True
