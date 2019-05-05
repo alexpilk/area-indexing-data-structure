@@ -43,7 +43,8 @@ class AreaIndex:
         """
         return [area.id for area in self.areas if self._point_in_area((lat, long), area)]
 
-    def _point_in_area(self, point, area):
+    @staticmethod
+    def _point_in_area(point, area):
         latitude_delta = point[0] - area.latitude
         longitude_delta = point[1] - area.longitude
         return latitude_delta ** 2 + longitude_delta ** 2 <= area.radius ** 2
