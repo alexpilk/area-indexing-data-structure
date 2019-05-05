@@ -17,3 +17,8 @@ def test_point_on_edge(area_index):
     point = (-20, 0)
     area = (-20, 20, 20, 'Area 1')
     assert area_index._point_in_area(point, area)
+
+
+def test_query_point_in_one_area(area_index):
+    area_index.bulk_create([(-10, 0, 10, 'Area 1'), (10, 0, 10, 'Area 2')])
+    assert area_index.query(-10, 0) == ['Area 1']
