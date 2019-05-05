@@ -2,6 +2,10 @@ from dataclasses import dataclass
 from numbers import Real as RealNumber
 
 
+class DuplicateIds(Exception):
+    pass
+
+
 @dataclass
 class Area:
     latitude: RealNumber
@@ -21,6 +25,9 @@ class AreaIndex:
 
         >>> AreaIndex().bulk_create([(-24.5, 134.8, 20, 'Australia')])
         """
+        if len({area[3] for area in areas}) < len(areas):
+            raise DuplicateIds('Multiple areas have same IDs')
+
         for area in areas:
             area = Area(*area)
             self.areas[area.id] = area
