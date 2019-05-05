@@ -22,3 +22,8 @@ def test_point_on_edge(area_index):
 def test_query_point_in_one_area(area_index):
     area_index.bulk_create([(-10, 0, 10, 'Area 1'), (10, 0, 10, 'Area 2')])
     assert area_index.query(-10, 0) == ['Area 1']
+
+
+def test_query_point_in_two_areas(area_index):
+    area_index.bulk_create([(-10, 0, 10, 'Area 1'), (10, 0, 10, 'Area 2')])
+    assert area_index.query(0, 0) == ['Area 1', 'Area 2']
