@@ -6,4 +6,4 @@ def test_bulk_create(area_index):
 
 
 def test_query(area_index):
-    assert area_index.query(0, 0) == []
+    assert area_index.query(0, 0) == set()
