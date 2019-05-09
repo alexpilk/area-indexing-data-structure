@@ -1,7 +1,8 @@
 from pytest import fixture
-from app.structure import AreaIndex
+
+from app.structure import SimpleAreaIndex, RangeBasedAreaIndex
 
 
-@fixture
-def area_index():
-    return AreaIndex()
+@fixture(params=[SimpleAreaIndex, RangeBasedAreaIndex])
+def area_index(request):
+    return request.param()

@@ -74,7 +74,6 @@ class Range:
             return []
         else:
             left_index = bisect.bisect_left(self.space, position)
-            print(left_index, position, self.space)
             if left_index != 0:
                 left_index -= 1
             right_index = left_index + 1

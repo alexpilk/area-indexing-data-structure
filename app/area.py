@@ -2,7 +2,7 @@ from dataclasses import dataclass
 from numbers import Real as RealNumber
 
 
-@dataclass
+@dataclass(unsafe_hash=True)
 class Area:
     latitude: RealNumber
     longitude: RealNumber
