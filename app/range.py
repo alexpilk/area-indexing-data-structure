@@ -7,3 +7,9 @@ class Range:
         self.areas = defaultdict(list)
         self.space = [x, y]
         self.areas[(x, y)].append(area)
+
+    def add(self, area, x, y):
+        first = self.space[0]
+        if y < first:
+            self.space = [x, y] + self.space
+            self.areas[(x, y)] = [area]
