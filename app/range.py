@@ -10,6 +10,11 @@ class Range:
         self.areas[(start, end)].add(area)
 
     def add(self, area, start, end):
+        """
+        :param Area area:
+        :param float start: start on latitude/longitude axis
+        :param float end: end on latitude/longitude axis
+        """
         first = self.space[0]
         last = self.space[-1]
         if end < first:
@@ -70,6 +75,11 @@ class Range:
         self.areas[(start, end)] = {area}
 
     def search(self, position):
+        """
+        :param float position:
+        :return: areas under given position
+        :rtype: set(Area)
+        """
         if position < self.space[0] or position > self.space[-1]:
             return []
         else:

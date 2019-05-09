@@ -21,7 +21,7 @@ class BaseAreaIndex(ABC):
         :param float lat:
         :param float long:
         :return: all areas that include given point.
-        :rtype: list
+        :rtype: set(Area)
         """
 
     @staticmethod

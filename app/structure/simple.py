@@ -23,7 +23,7 @@ class SimpleAreaIndex(BaseAreaIndex):
         :param float lat:
         :param float long:
         :return: all areas that include given point.
-        :rtype: list
+        :rtype: set(Area)
 
         >>> SimpleAreaIndex().query(0.0, 0.0)
         set()
