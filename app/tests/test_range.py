@@ -1,5 +1,5 @@
-from app.range import Range
 from app.area import Area
+from app.range import Range
 
 
 def test_range_is_created():
@@ -61,6 +61,27 @@ def test_area_inserted_touching_left_right():
     main_range.add(area_2, area_2.min_lat, area_2.max_lat)
     assert main_range.space == [-20, 40, 60]
     assert main_range.areas == {(-20, 40): [area_1], (40, 60): [area_2]}
+
+
+def test_area_inserted_touching_on_all_sides():
+    main_area = Area(0, 20, 10, 'Area 1')
+    left = Area(-20, 20, 10, 'Area 2')
+    left_right = Area(-6, 20, 4, 'Area 3')
+    right_left = Area(6, 20, 4, 'Area 4')
+    right = Area(20, 20, 10, 'Area 5')
+    main_range = Range(main_area, main_area.min_lat, main_area.max_lat)
+    main_range.add(left, left.min_lat, left.max_lat)
+    main_range.add(left_right, left_right.min_lat, left_right.max_lat)
+    main_range.add(right_left, right_left.min_lat, right_left.max_lat)
+    main_range.add(right, right.min_lat, right.max_lat)
+    assert main_range.space == [-30, -10, -2, 2, 10, 30]
+    assert main_range.areas == {
+        (-30, -10): [left],
+        (-10, -2): [main_area, left_right],
+        (-2, 2): [main_area],
+        (2, 10): [main_area, right_left],
+        (10, 30): [right]
+    }
 
 
 def test_area_inserted_crossing_on_the_left():
@@ -140,4 +161,3 @@ def test_area_inserted_aligns():
     main_range.add(area_2, area_2.min_lat, area_2.max_lat)
     assert main_range.space == [-20, 40]
     assert main_range.areas == {(-20, 40): [area_1, area_2]}
-
