@@ -68,3 +68,16 @@ class Range:
     def _add_after(self, area, start, end):
         self.space = self.space + [start, end]
         self.areas[(start, end)] = [area]
+
+    def search(self, position):
+        if position < self.space[0] or position > self.space[-1]:
+            return []
+        else:
+            left_index = bisect.bisect_left(self.space, position)
+            print(left_index, position, self.space)
+            if left_index != 0:
+                left_index -= 1
+            right_index = left_index + 1
+            left = self.space[left_index]
+            right = self.space[right_index]
+            return self.areas[left, right]
