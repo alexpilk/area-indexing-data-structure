@@ -34,7 +34,7 @@ class RangeBasedAreaIndex(BaseAreaIndex):
 
         """
         if self.longitudes and self.latitudes:
-            possible_areas = set(self.latitudes.search(lat) + self.longitudes.search(long))
+            possible_areas = self.latitudes.search(lat).union(self.longitudes.search(long))
             return self._find_areas(possible_areas, lat, long)
         else:
             return set()
