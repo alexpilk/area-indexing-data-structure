@@ -161,3 +161,38 @@ def test_area_inserted_aligns():
     main_range.add(area_2, area_2.min_lat, area_2.max_lat)
     assert main_range.space == [-20, 40]
     assert main_range.areas == {(-20, 40): [area_1, area_2]}
+
+
+def test_query_not_found():
+    area_1 = Area(0, 20, 10, 'Area 1')
+    main_range = Range(area_1, area_1.min_lat, area_1.max_lat)
+    assert main_range.search(-11) == []
+    assert main_range.search(11) == []
+
+
+def test_query_found_in_one_area():
+    area_1 = Area(0, 20, 10, 'Area 1')
+    main_range = Range(area_1, area_1.min_lat, area_1.max_lat)
+    assert main_range.search(0) == [area_1]
+    assert main_range.search(-10) == [area_1]
+    assert main_range.search(10) == [area_1]
+
+
+def test_query_found_in_multiple_areas():
+    main_area = Area(0, 20, 20, 'Main')
+    left_cross = Area(-20, 20, 30, 'Left Cross')
+    right_cross = Area(20, 20, 30, 'Right Cross')
+    main_range = Range(main_area, main_area.min_lat, main_area.max_lat)
+    main_range.add(left_cross, left_cross.min_lat, left_cross.max_lat)
+    main_range.add(right_cross, right_cross.min_lat, right_cross.max_lat)
+    assert main_range.search(-50) == [left_cross]
+    assert main_range.search(-40) == [left_cross]
+    assert main_range.search(-20) == [left_cross]
+    assert main_range.search(-15) == [main_area, left_cross]
+    assert main_range.search(-10) == [main_area, left_cross]
+    assert main_range.search(0) == [main_area, left_cross, right_cross]
+    assert main_range.search(10) == [main_area, left_cross, right_cross]
+    assert main_range.search(15) == [main_area, right_cross]
+    assert main_range.search(20) == [main_area, right_cross]
+    assert main_range.search(40) == [right_cross]
+    assert main_range.search(50) == [right_cross]
