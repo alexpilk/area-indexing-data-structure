@@ -1,23 +1,15 @@
-from dataclasses import dataclass
-from numbers import Real as RealNumber
+from app.area import Area
 
 
 class DuplicateIds(Exception):
     pass
 
 
-@dataclass
-class Area:
-    latitude: RealNumber
-    longitude: RealNumber
-    radius: RealNumber
-    id: object
-
-
 class AreaIndex:
 
     def __init__(self):
         self.areas = []
+        self.latitudes = []
 
     def bulk_create(self, areas):
         """
